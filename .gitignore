@@ -1,3 +1,4 @@
 *env
 *.fif
 .vsc*
+.lightning_studio
