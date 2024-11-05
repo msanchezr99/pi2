@@ -14,9 +14,12 @@ def lectura(fif_file):
     return raw_data
 
 def time_freq(raw_data,duracion,picks,f_min,f_max):
+    if picks==None:
+        picks=raw_data.ch_names
+        print(picks)
     epochs = mne.make_fixed_length_epochs(raw_data, duration=duracion, overlap=0.5)#preload=True
-
-    frequencies=np.arange(f_min,f_max,1)
+    print(epochs.picks)
+    frequencies=np.linspace(f_min,f_max,2*int(f_max-f_min))
     power = epochs.compute_tfr(
         method="morlet",
         picks=picks,
@@ -25,11 +28,11 @@ def time_freq(raw_data,duracion,picks,f_min,f_max):
         #time_bandwidth=time_bandwidth,
         return_itc=False,
         #average=True,
-        n_jobs=3)
+        n_jobs=5)
     
-    return power
+    return epochs,power
 
 def proceso(fif_file,duracion,picks,f_min,f_max):
     raw_data=lectura(fif_file)
-    power=time_freq(raw_data,duracion,picks,f_min,f_max)
-    return power
+    epochs,power=time_freq(raw_data,duracion,picks,f_min,f_max)
+    return epochs,power
