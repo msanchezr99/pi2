@@ -14,10 +14,14 @@ def lectura(fif_file):
     return raw_data
 
 def time_freq(raw_data,duracion,picks,f_min,f_max):
+    """
+    Calcula epochs y transformación tiempo frecuencia
+    Si no se indican picks, toma todos los canales.
+    """
     if picks==None:
         picks=raw_data.ch_names
         print(picks)
-    epochs = mne.make_fixed_length_epochs(raw_data, duration=duracion, overlap=0.5)#preload=True
+    epochs = mne.make_fixed_length_epochs(raw_data, duration=duracion, overlap=5)#preload=True
     print(epochs.picks)
     frequencies=np.linspace(f_min,f_max,2*int(f_max-f_min))
     power = epochs.compute_tfr(
