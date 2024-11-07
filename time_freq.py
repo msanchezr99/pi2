@@ -32,6 +32,7 @@ def time_freq(raw_data,duracion,picks,f_min,f_max):
         #time_bandwidth=time_bandwidth,
         return_itc=False,
         #average=True,
+        #decim=4
         n_jobs=5)
     
     return epochs,power
@@ -40,3 +41,6 @@ def proceso(fif_file,duracion,picks,f_min,f_max):
     raw_data=lectura(fif_file)
     epochs,power=time_freq(raw_data,duracion,picks,f_min,f_max)
     return epochs,power
+
+
+

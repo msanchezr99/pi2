@@ -58,3 +58,37 @@ if __name__=="__main__":
     #         plt.show()
 
         
+
+
+
+    # for i, epoch_power_data in enumerate(all_epoch_powers[:3]):  # Plot the first 3 epochs
+    #     plt.figure(figsize=(10, 5))
+    #     plt.imshow(
+    #         epoch_power_data.mean(axis=0), aspect='auto', origin='lower',
+    #         extent=[0, epoch_power_data.shape[2], gamma_frequencies[0], gamma_frequencies[-1]]
+    #     )
+    #     plt.colorbar(label='Power')
+    #     plt.xlabel('Time (downsampled)')
+    #     plt.ylabel('Frequency (Hz)')
+    #     plt.title(f'Time-Frequency Representation - Epoch {i+1} (Gamma Band)')
+    #     plt.show()
+
+
+
+    # output_dir = 'Data/gamma_band_time_frequency_epochs'
+    # os.makedirs(output_dir, exist_ok=True)
+
+    # # Loop through each epoch in the list
+    # for i, epoch_power_data in enumerate(all_epoch_powers):
+    #     # epoch_power_data shape should be [n_channels, n_frequencies, n_time_points]
+    #     for ch_idx, ch_name in enumerate(epochs.info['ch_names']):
+    #         # Extract the power data for the specific channel
+    #         channel_power_data = epoch_power_data[ch_idx]
+            
+    #         # Define filename for saving
+    #         filename = f'epoch_{i+1}_channel_{ch_name}.npy'
+            
+    #         # Save the channel power data as a .npy file
+    #         np.save(os.path.join(output_dir, filename), channel_power_data)
+
+    # print(f"Time-frequency representations saved in {output_dir}")
