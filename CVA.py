@@ -8,6 +8,7 @@ class Encoder(nn.Module):
         n_freqs, n_times = input_shape
         
         self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=2, padding=1)  # Output: 32 x n_freqs/2 x n_times/2
+        
         self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=2, padding=1)  # Output: 64 x n_freqs/4 x n_times/4
         self.conv3 = nn.Conv2d(64, 128, kernel_size=3, stride=2, padding=1)  # Output: 128 x n_freqs/8 x n_times/8
         
@@ -20,9 +21,11 @@ class Encoder(nn.Module):
 
     def forward(self, x):
         x = F.relu(self.conv1(x))
+        print(x.shape)
         x = F.relu(self.conv2(x))
+        print(x.shape)
         x = F.relu(self.conv3(x))
-        
+        print(x.shape)
         # Flatten the output
         x = torch.flatten(x, start_dim=1)
         
@@ -35,10 +38,10 @@ class Encoder(nn.Module):
 class Decoder(nn.Module):
     def __init__(self, input_shape, latent_dim=16):
         super(Decoder, self).__init__()
-        n_freqs, n_times = input_shape
+        self.n_freqs, self.n_times = input_shape
 
         # Calculate size after convolutions for reshaping
-        conv_output_size = (n_freqs // 8) * (n_times // 8) * 128
+        conv_output_size = (self.n_freqs // 8) * (self.n_times // 8) * 128
         
         # Fully connected layer for reconstructing feature map shape
         self.fc = nn.Linear(latent_dim, conv_output_size)
@@ -51,7 +54,7 @@ class Decoder(nn.Module):
     def forward(self, z):
         # Decode fully connected to a feature map
         x = self.fc(z)
-        x = x.view(-1, 128, n_freqs // 8, n_times // 8)
+        x = x.view(-1, 128, self.n_freqs // 8, self.n_times // 8)
         
         # Apply deconvolutions
         x = F.relu(self.deconv1(x))
