@@ -35,7 +35,7 @@ def time_freq(epochs,picks,f_min,f_max):
         #time_bandwidth=time_bandwidth,
         return_itc=False,
         #average=True,
-        #decim=4
+        decim=3,
         n_jobs=5)
     
     return power
