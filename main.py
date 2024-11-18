@@ -38,8 +38,8 @@ def save_images(power_data,n_epochs,n_channels):
             # plt.close()
 
 if __name__=="__main__":
-    f_min=30
-    f_max=100
+    f_min=10
+    f_max=80
     epochs,power=proceso("SR_10min_cleaned.fif",15,picks,f_min,f_max,overlap=2)
     n_epochs,n_channels,n_freqs,n_times=power.data.shape
     print(f"n_epochs, n_channels, n_times, n_freqs: {n_epochs},{n_channels}, {n_times}, {n_freqs}")

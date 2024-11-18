@@ -26,9 +26,10 @@ def time_freq(epochs,picks,f_min,f_max):
         picks=epochs.ch_names
         print(picks)
     # print(epochs.picks)
+    
     frequencies=np.linspace(f_min,f_max,2*int(f_max-f_min))
     power = epochs.compute_tfr(
-        method="morlet",
+        method="stockwell", #"morlet",
         picks=picks,
         freqs=frequencies,
         n_cycles=frequencies/2, #n_ciclos por cada freq
