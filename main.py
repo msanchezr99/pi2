@@ -42,6 +42,12 @@ if __name__=="__main__":
     f_max=80
     epochs,power=proceso("SR_10min_cleaned.fif",15,picks,f_min,f_max,overlap=2)
     n_epochs,n_channels,n_freqs,n_times=power.data.shape
+    
+    # epileptogenic=["m'3","sc'3","sc'4","sc'5","sc'6","y'4","y'5","y'6","y'7","y'8","y'9"]
+    # non_epileptogenic=[channel for channel in epochs.ch_names if channel not in epileptogenic]
+    # indices_epileptogenic=mne.pick_channels(epochs.info['ch_names'], include=epileptogenic)
+    # indices_non_epileptogenic=mne.pick_channels(epochs.info['ch_names'], include=non_epileptogenic)
+
     print(f"n_epochs, n_channels, n_times, n_freqs: {n_epochs},{n_channels}, {n_times}, {n_freqs}")
     epoch_idx=8
     # ch_idx=6
