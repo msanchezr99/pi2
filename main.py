@@ -10,7 +10,11 @@ picks=["n'1", "n'2","n'3", "n'4", "cc'1", "cc'2", "cc'3", "cc'4", "cc'5", "m'1",
 "op'3", "op'4", "pi'1", "pi'2", "pi'3", "pa'1", "pa'2", "pa'3", "pa'4"]
 
 def save_images(power_data,n_epochs,n_channels):
-    output_dir = 'output_arrays'
+    cropped=False
+    if cropped:
+        output_dir = 'output_arrays'
+    else: 
+        output_dir = 'full_output_arrays'
     os.makedirs(output_dir, exist_ok=True)
 
     # Loop over each epoch and channel
@@ -48,8 +52,8 @@ if __name__=="__main__":
     # indices_epileptogenic=mne.pick_channels(epochs.info['ch_names'], include=epileptogenic)
     # indices_non_epileptogenic=mne.pick_channels(epochs.info['ch_names'], include=non_epileptogenic)
 
-    print(f"n_epochs, n_channels, n_times, n_freqs: {n_epochs},{n_channels}, {n_times}, {n_freqs}")
-    epoch_idx=8
+    print(f"n_epochs, n_channels, n_freqs, n_times: {n_epochs}, {n_channels}, {n_freqs}, {n_times}")
+    # epoch_idx=8
     # ch_idx=6
     save_images(power.data,n_epochs,n_channels)
     # for epoch_idx in range(12):

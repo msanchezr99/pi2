@@ -10,7 +10,7 @@ fmax = 134.0  # Maximum frequency in Hz
 
 def lectura(fif_file,duracion,overlap=3,save=False):
     raw_data=mne.io.read_raw_fif("SR_10min_cleaned.fif",preload=True)
-    raw_data.crop(4*60,12*60)
+    #raw_data.crop(4*60,12*60)
     epochs = mne.make_fixed_length_epochs(raw_data, duration=duracion, overlap=overlap)#preload=True
     if save:
         output_epochs_file = 'Data/full_recording_epochs-epo.fif'
@@ -29,7 +29,7 @@ def time_freq(epochs,picks,f_min,f_max):
     
     frequencies=np.linspace(f_min,f_max,2*int(f_max-f_min))
     power = epochs.compute_tfr(
-        method="stockwell", #"morlet",
+        method="morlet",
         picks=picks,
         freqs=frequencies,
         n_cycles=frequencies/2, #n_ciclos por cada freq
